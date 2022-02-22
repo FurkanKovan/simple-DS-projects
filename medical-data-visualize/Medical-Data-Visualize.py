@@ -24,7 +24,6 @@ df["gluc"] = df["gluc"].map({True: 1, False: 0})
 
 # Drawing Categorical Plot
 def draw_cat_plot():
-<<<<<<< HEAD
     df_cat = pd.melt(df[plot_columns],
                      id_vars="cardio",
                      value_vars=["active", "alco", "cholesterol", "gluc", "overweight", "smoke"])
@@ -34,15 +33,6 @@ def draw_cat_plot():
 
     sns.set_style("white")
     fig = sns.catplot(x="variable", y="total", hue="value", data=df_cat, kind="bar", col="cardio")
-=======
-    plot_columns = ["active", "alco", "cholesterol", "gluc", "overweight", "smoke", "cardio"]
-    df_cat = pd.melt(df[plot_columns], id_vars="cardio", var_name='variable')
-
-    df_cat = df_cat.groupby(['variable']).apply(lambda df: df.cardio.value_counts())
-
-    sns.set_style("white")
-    fig = sns.catplot(x="variable", hue="value", data=df_cat, kind="count", col="cardio")
->>>>>>> origin/master
 
     fig.set_xlabels('variable', fontsize=15)
     fig.set_ylabels('total', fontsize=15)
@@ -58,15 +48,9 @@ def draw_heat_map():
     df_heat = df.copy()
     df_heat.drop(df_heat[df_heat["ap_lo"] > df_heat["ap_hi"]].index, inplace=True)
     df_heat.drop(df_heat[df_heat["height"] < df_heat["height"].quantile(0.025)].index, inplace=True)
-<<<<<<< HEAD
     df_heat.drop(df_heat[df_heat["height"] > df_heat["height"].quantile(0.975)].index, inplace=True)
     df_heat.drop(df_heat[df_heat["weight"] < df_heat["weight"].quantile(0.025)].index, inplace=True)
     df_heat.drop(df_heat[df_heat["weight"] > df_heat["weight"].quantile(0.975)].index, inplace=True)
-=======
-    df_heat.drop(df_heat[df_heat["height"] >= df_heat["height"].quantile(0.975)].index, inplace=True)
-    df_heat.drop(df_heat[df_heat["weight"] <= df_heat["weight"].quantile(0.025)].index, inplace=True)
-    df_heat.drop(df_heat[df_heat["weight"] >= df_heat["weight"].quantile(0.975)].index, inplace=True)
->>>>>>> origin/master
 
     corr = df_heat.corr()
     mask = np.zeros_like(corr, dtype=bool)
