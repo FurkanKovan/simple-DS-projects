@@ -1,5 +1,8 @@
 import numpy as np
 
+# This function takes a list with exactly 9 numbers, turns it to (3,3) matrix and calculates the mean, variance,
+# standard deviation, min-max and sum values of the all rows and columns. Returns them as a calculation dictionary.
+
 
 def calculate(my_list):
     matrix = my_list
